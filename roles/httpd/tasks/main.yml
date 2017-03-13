@@ -1,0 +1,8 @@
+---
+# tasks file for httpd
+
+- include: install-httpd.yml
+  become: yes
+
+- include: configure-iptables.yml
+  become: yes

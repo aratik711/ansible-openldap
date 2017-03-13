@@ -1,0 +1,14 @@
+---
+# tasks file for openldap-cluster/
+
+- include: mod-syncprov.yml
+  become: yes
+
+- include: syncprov.yml
+  become: yes
+
+- include: master-config.yml
+  become: yes
+
+- include: ldap-bind.yml
+  become: yes

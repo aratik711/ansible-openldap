@@ -1,0 +1,26 @@
+---
+
+- name: Copy master01 file
+  template:
+    src: master01.ldif.j2
+    dest: /tmp/master01.ldif
+  when: inventory_hostname=="ldap-1.server.world.local"
+
+- name: add second master for ldap-1
+  shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/master01.ldif
+  register: master01
+  failed_when: "'olcObjectClasses: AttributeType not found' in master01.stderr"
+  when: inventory_hostname=="ldap-1.server.world.local"
+
+- name: Copy master02 file
+  template:
+    src: master02.ldif.j2
+    dest: /tmp/master02.ldif
+  when: inventory_hostname=="ldap-2.server.world.local"
+
+- name: add second master for ldap-2
+  shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/master02.ldif
+  register: master02
+  failed_when: "'olcObjectClasses: AttributeType not found' in master02.stderr"
+  when: inventory_hostname=="ldap-2.server.world.local"
+

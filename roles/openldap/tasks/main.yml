@@ -1,0 +1,26 @@
+---
+# tasks file for openldap
+
+- include: install.yml
+  become: yes
+
+- include: db-config.yml
+  become: yes
+
+- include: configure-iptables.yml
+  become: yes
+
+- include: generate-password.yml
+  become: yes
+
+- include: chroot-pass.yml
+  become: yes
+
+- include: import-schemas.yml
+  become: yes
+
+- include: chdomain.yml
+  become: yes
+
+- include: set-basedomain.yml
+  become: yes

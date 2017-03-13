@@ -1,0 +1,6 @@
+---
+
+- name: install phpldapadmin
+  yum:
+    name: phpldapadmin
+    state: present

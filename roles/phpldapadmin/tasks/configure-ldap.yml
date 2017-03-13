@@ -1,0 +1,16 @@
+---
+
+- name: enable dn login
+  copy: 
+    src: ../files/config.php 
+    dest: /etc/phpldapadmin/config.php
+    owner: root
+    group: apache
+    mode: 0640
+ 
+- name: allow httpd
+  replace:
+    dest: /etc/httpd/conf.d/phpldapadmin.conf
+    regexp: 'Require local'
+    replace: 'Require all granted'
+  notify: restart httpd

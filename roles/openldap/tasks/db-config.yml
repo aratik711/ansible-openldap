@@ -1,0 +1,12 @@
+---
+
+- name: copy DB_CONFIG file
+  copy:
+    src: /usr/share/openldap-servers/DB_CONFIG.example 
+    dest: /var/lib/ldap/DB_CONFIG 
+    owner: ldap
+    group: ldap
+    mode: 0644
+
+- name: start ldap
+  shell: systemctl restart slapd

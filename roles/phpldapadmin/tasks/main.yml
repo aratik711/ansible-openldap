@@ -1,0 +1,11 @@
+---
+# tasks file for phpldapadmin
+
+- include: install-epel.yml
+  become: yes
+
+- include: install-phpldapadmin.yml
+  become: yes
+
+- include: configure-ldap.yml
+  become: yes

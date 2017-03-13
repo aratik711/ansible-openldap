@@ -1,0 +1,12 @@
+---
+
+# Installation and configuration of ldap server
+
+- hosts: ldap
+  user: compose
+  become: yes
+  become_method: sudo
+  connection: ssh
+  roles:
+     - iptables
+     - openldap

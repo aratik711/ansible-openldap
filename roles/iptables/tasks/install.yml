@@ -1,0 +1,25 @@
+---
+- name: install firewalld 
+  yum: 
+    name: firewalld 
+    state: present
+
+- name: stop firewalld
+  service: name=firewalld state=stopped enabled=false
+  when: ansible_distribution_major_version|int >= 7
+
+- name: mask firewalld
+  command: systemctl mask firewalld
+  register: systemctl_test
+  failed_when: "systemctl_test.rc != 0"
+  changed_when: False
+  ignore_errors: True
+  when: ansible_distribution_major_version|int >= 7
+
+- name: install iptables
+  yum: name={{ item }} state=present
+  with_items: "{{ iptables_packages }}"
+
+- name: start and enable service
+  service: name={{ item }} state=started enabled=yes
+  with_items: "{{ iptables_start_enable }}"

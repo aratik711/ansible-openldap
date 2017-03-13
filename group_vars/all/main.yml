@@ -1,0 +1,7 @@
+---
+
+dc_domain: dc=server,dc=world,dc=net
+
+ldap_pass: password
+
+ldap_servers: ldap-1.server.world.local,ldap-2.server.world.local

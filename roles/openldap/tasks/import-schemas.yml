@@ -1,0 +1,17 @@
+---
+#Import ldap schemas
+
+- name: import ldap cosine schemas
+  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+  register: cosine
+  failed_when: "'olcObjectClasses: AttributeType not found' in cosine.stderr"
+
+- name: import nis schema
+  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+  register: nis
+  failed_when: "'olcObjectClasses: AttributeType not found' in nis.stderr"
+
+- name: import inetorgperson schema
+  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+  register: inetorg
+  failed_when: "'olcObjectClasses: AttributeType not found' in inetorg.stderr"

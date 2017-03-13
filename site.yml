@@ -1,0 +1,9 @@
+---
+
+- include: openldap.yml
+
+- include: openldap-cluster.yml
+
+- include: httpd.yml
+
+- include: phpldapadmin.yml

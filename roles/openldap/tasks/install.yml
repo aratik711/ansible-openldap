@@ -1,0 +1,11 @@
+---
+
+- name: install the latest version of openldap servers
+  yum:
+    name: openldap-servers
+    state: latest
+
+- name: install the latest version of openldap clients
+  yum:
+    name: openldap-clients
+    state: latest

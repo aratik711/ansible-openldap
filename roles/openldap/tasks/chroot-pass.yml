@@ -1,0 +1,11 @@
+---
+#configuration of ldap server
+- name: copy chrootpw ldif file
+  template:
+    src: chrootpw.ldif.j2
+    dest: "/tmp/chrootpw.ldif"
+
+- name: change the root password for ldap
+  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/chrootpw.ldif
+  register: chroot
+  failed_when: "'olcObjectClasses: AttributeType not found' in chroot.stderr"

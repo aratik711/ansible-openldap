@@ -1,0 +1,12 @@
+---
+#configuration of ldap server
+- name: copy chdomain ldif file
+  template:
+    src: chdomain.ldif.j2
+    dest: "/tmp/chdomain.ldif"
+
+- name: change the root domain for ldap
+  shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/chdomain.ldif
+  register: chdomain
+  failed_when: "'olcObjectClasses: AttributeType not found' in chroot.stderr"
+

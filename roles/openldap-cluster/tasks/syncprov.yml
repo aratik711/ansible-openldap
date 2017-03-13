@@ -1,0 +1,12 @@
+---
+
+- name: Copy _syncprov file
+  copy:
+    src: ../files/syncprov.ldif
+    dest: /tmp/syncprov.ldif
+
+- name: add module syncprov in hdb for ldap
+  shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/syncprov.ldif
+  register: syncprov
+  failed_when: "'olcObjectClasses: AttributeType not found' in syncprov.stderr"
+

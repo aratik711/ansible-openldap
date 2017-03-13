@@ -1,0 +1,14 @@
+---
+#configuration of ldap server
+- name: copy basedomain ldif file
+  template:
+    src: basedomain.ldif.j2
+    dest: "/tmp/basedomain.ldif"
+
+- name: change the base domain for ldap
+  shell: ldapadd -x -D cn=Manager,{{ dc_domain }} -w Canopy1! -f /tmp/basedomain.ldif
+  register: basedomain
+  failed_when:
+    -  "'olcObjectClasses: AttributeType not found' in basedomain.stderr"
+    -  "'invalid' in basedomain.stderr"
+

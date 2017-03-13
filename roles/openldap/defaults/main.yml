@@ -1,0 +1,8 @@
+---
+# defaults file for ldap
+
+ldap_server_port: 389
+
+space_domain: 'server world net'
+
+first_domain: server

@@ -1,0 +1,6 @@
+---
+
+- name: bind all the ldap servers
+  shell: authconfig --ldapserver={{ ldap_servers }} --update
+  when: inventory_hostname!="ldap-1.server.world.local"
+

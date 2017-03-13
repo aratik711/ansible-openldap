@@ -1,0 +1,4 @@
+---
+# defaults file for httpd
+
+httpd_server_port: 80

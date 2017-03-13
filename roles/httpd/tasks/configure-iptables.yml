@@ -1,0 +1,8 @@
+---
+# Tasks to add ports in iptables
+
+- name: insert iptables rule to open port 80 for ldap
+  lineinfile: dest=/etc/sysconfig/iptables state=present regexp="-A INPUT -p tcp -m state --state NEW -m tcp --dport {{httpd_server_port}} -j ACCEPT"
+              insertbefore="^-A INPUT -j REJECT" line="-A INPUT -p tcp -m state --state NEW -m tcp --dport {{httpd_server_port}} -j ACCEPT"
+  notify: restart iptables
+
